@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-pre指令</title>
+    <!-- 1、引入开发版的 Vue , 在 window全局就有了Vue 这个构造函数 -->
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+			v-pre指令：
+					1.跳过 其 所在节点的编译过程。
+					2.可利用它跳过：没有使用指令语法、没有使用插值语法的节点，会加快编译。
+          
+          加了 v-pre指令 后  vue实例 就不会去解析它了！！
+		-->
+
+    <!--2、准备好一个容器，希望 Vue能够控制下面的这个div,帮我们再把数据填充到 div内部 -->
+    <div id="app">
+      <h3 v-once>初始化的n值是:{{n}}</h3>
+      <h3>当前n的值是: {{n}}</h3>
+      <h3 v-pre>使用 v-pre 指令后的 n的值是: {{n}}</h3>
+      <button @click=" n++">点击一次 n+1</button>
+    </div>
+
+    <!-- 3、创建 Vue 的实例对象 -->
+    <script type="text/javascript">
+      //3.1、创建 Vue 实例  ，参数只能传一个对象 ，这种对象叫 配置对象
+      const vm = new Vue({
+        // el 属性 是固定写法，用于指定当前vm实例要控制页面上的哪个区域，接收的值 是一个 css选择器
+        el: "#app", // el : document.getElementById('root'),
+
+        // data 对象 就是要渲染到页面上的数据
+        data: {
+          n: 1, //怎么把 name渲染到页面上？
+        },
+      });
+    </script>
+  </body>
+</html>

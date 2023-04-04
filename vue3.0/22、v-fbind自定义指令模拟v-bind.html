@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义指令v-fbind</title>
+    <!-- 1、引入开发版的 Vue , 在 window全局就有了Vue 这个构造函数 -->
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+			自定义指令: 定义一个 v-fbind指令，和 v-bind功能类似，但可以让其所绑定的input元素默认获取焦点。			
+		-->
+
+    <!--2、准备好一个容器，希望 Vue能够控制下面的这个div,帮我们再把数据填充到 div内部 -->
+    <div id="app">
+      <button @click=" n++">点击一次 n+1</button>
+      <!-- <input type="text" v-bind:value="n" /> -->
+      <input type="text" v-fbind:value="n" />
+    </div>
+
+    <!-- 3、创建 Vue 的实例对象 -->
+    <script type="text/javascript">
+      //3.1、创建 Vue 实例  ，参数只能传一个对象 ，这种对象叫 配置对象
+      const vm = new Vue({
+        // el 属性 是固定写法，用于指定当前vm实例要控制页面上的哪个区域，接收的值 是一个 css选择器
+        el: "#app", // el : document.getElementById('root'),
+        // data 对象 就是要渲染到页面上的数据
+        data: {
+          n: 1, //怎么把 name渲染到页面上？
+        },
+        directives: {
+          // fbind 函数 的  第一个形参 element 是 固定写法，是 原生DOM对象，是 指令绑定的元素。一般简写 el
+          //                第二个形参 binding ，是用来 接收 自定义指令的 参数值。
+          // fbind(element, binding) {
+          //   element.value = binding.value;
+          //   element.focus();
+          // },
+
+          // fbind 指向一个配置对象，何时被调用？
+          fbind: {
+            // 1、指令 与 元素 在内存中成功绑定时（一上来）。  第1次会自动调用
+            bind(el, binding) {
+              console.log(el);
+              console.log(binding);
+              console.log("bind");
+              el.style.backgroundColor = "yellow";
+              el.value = binding.value; // binding.value 指 指令做绑定的属性的属性值
+            },
+            // 2、指令 所在元素 被插入页面时（真实DOM时）。  第2次会自动调用
+            inserted(el, binding) {
+              console.log("inserted");
+              console.log(el.parentElement); //  <div>...</div>
+              el.focus();
+            },
+            // 3、指令 所在模板 被重新解析时。   (所绑定的DOM对象发生变化时，就自动调用)
+            update(el, binding) {
+              console.log("updated");
+              el.value = binding.value;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

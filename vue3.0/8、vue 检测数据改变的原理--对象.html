@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue 检测数据改变的原理--检测内部一层、任意层</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h5>学校名称：{{name}}</h5>
+      <h5>学校地址：{{address}}</h5>
+      <h5>学生：{{student}}</h5>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            name: "清华大学",
+            address: "北京",
+
+            student: {
+              name: "lisi",
+
+              age: {
+                rage: 36,
+                sage: 18,
+              },
+
+              friend: [
+                { name: "wangwu", age: 33 },
+                { name: "laoliu", age: 35 },
+              ],
+            },
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

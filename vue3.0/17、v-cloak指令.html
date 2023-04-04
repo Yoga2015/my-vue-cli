@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-clock指令</title>
+    <!-- 1、引入开发版的 Vue , 在 window全局就有了Vue 这个构造函数 -->
+    <script src="./vue.js"></script>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-cloak指令（没有值）：
+						1.本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删掉v-cloak属性。
+						2.使用css 配合v-cloak 可以解决 网速慢时页面展示出{{xxx}}的问题。 
+
+            当你的网速过慢的时候，v-cloak 指令 可以 不让 未经解析的模板 渲染到页面上
+    -->
+
+    <!--2、准备好一个容器，希望 Vue能够控制下面的这个div,帮我们再把数据填充到 div内部 -->
+    <div id="app">
+      <h3 v-cloak>{{name}}</h3>
+    </div>
+
+    <!-- 3、创建 Vue 的实例对象 -->
+    <script type="text/javascript">
+      //3.1、创建 Vue 实例  ，参数只能传一个对象 ，这种对象叫 配置对象
+      const vm = new Vue({
+        // el 属性 是固定写法，用于指定当前vm实例要控制页面上的哪个区域，接收的值 是一个 css选择器
+        el: "#app", // el : document.getElementById('root'),
+
+        // data 对象 就是要渲染到页面上的数据
+        data: {
+          name: "walking", //怎么把 name渲染到页面上？
+        },
+      });
+    </script>
+  </body>
+</html>

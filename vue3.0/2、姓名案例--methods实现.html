@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>姓名案例--methods实现</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>姓：<input type="text" v-model="firstName" /></div>
+      <div>名：<input type="text" v-model="lastName" /></div>
+      <div>全名：{{fullName() }}</div>
+      <div>全名：{{fullName() }}</div>
+      <div>全名：{{fullName() }}</div>
+
+      <div>methods节点中的 fullName() 被调用了3次</div>
+
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        // 只要 data 中的数据发生改变，vue一定会重新解析模板
+        data() {
+          return {
+            firstName: "张",
+            lastName: "三",
+          };
+        },
+        methods: {
+          fullName() {
+            console.log("fullName 被调用了");
+            return this.firstName + this.lastName;
+          },
+        },
+      });
+    </script>
+    <script>
+      let str ='abc';
+      for(let i = 0; i < str.length; i++){
+        console.log(str[i]);
+      }
+    </script>
+  </body>
+</html>

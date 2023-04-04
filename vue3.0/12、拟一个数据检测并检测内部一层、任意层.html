@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模拟一个数据检测并检测内部一层、任意层</title>
+  </head>
+  <body>
+    <script>
+      let data = {
+        // name: "北京大学",
+        // address: "北京朝阳区",
+        person: [
+          { name: "lisi", age: 16 },
+          { name: "lili", age: 17, sex: "男" },
+        ],
+      };
+
+      // 创建 一个监视的实例对象，用于监视data 中属性的变化
+      const obs = new Observer(data);
+      console.log(obs);
+
+      // Observer 监视函数
+      function Observer(obj) {
+        // 汇总 对象中所有的属性 形成一个数组
+        const keys = Object.keys(obj);
+
+        // 遍历
+        keys.forEach((k) => {
+          Object.defineProperty(this, k, {
+            get() {
+              // return obj[k]; // 这是 把 对象中对应的属性的属性值 return 出去
+              // return k[1];
+              const Kprops = Object.keys(k);
+              console.log(Kprops);
+              // Kprops.forEach((j) => {
+              //   Object.defineProperty(this, j, {
+              //     get() {
+              //       return k[j];
+              //     },
+              //   });
+              // });
+            },
+            set(val) {
+              this.obj[k] = val;
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期钩子</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- 需求：页面一上来就显示 文字透明度渐变过程 -->
+
+    <div id="app">
+      <h2 v-if="flag">你好,walking!</h2>
+      <!--第一个opacity 是 css 的透明度，第二个 opacity 是 data中的数据 ，重名可以简写成一个 -->
+      <!-- <h2 :style="{opacity:opacity}">欢迎来到极乐世界！</h2> -->
+      <h3 :style="{opacity}">欢迎来到极乐世界！</h3>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            flag: false,
+            opacity: 1,
+          };
+        },
+        // Vue完成 模板的解析  并 把 初始的 真实DOM元素 放入页面 （挂载完毕）后，调用 mouted
+        mounted() {
+          console.log("mounted", this);
+          setInterval(() => {
+            this.opacity -= 0.01;
+            if (this.opacity <= 0) this.opacity = 1;
+          }, 16);
+        },
+
+        //当修改页面中的数据时，上面这个 mounted函数 不会再触发，而是在 updated函数 阶段触发
+      });
+
+      // 通过 外部的定时器 实现，页面一上来就显示 文字透明度渐变过程   （不推荐）
+      // setInterval(function () {
+      //   vm.opacity -= 0.01;
+      //   if (vm.opacity <= 0) vm.opacity = 1;
+      // }, 16);
+    </script>
+  </body>
+</html>

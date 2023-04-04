@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>渲染列表并过滤</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="info">
+      <h3>人员列表</h3>
+      <input type="text" placeholder="请输入内容" v-model="keyWord" />
+      <button @click="sortType = 2">年龄升序</button>
+      <button @click="sortType = 1">年龄降序</button>
+      <button @click="sortType = 0">原顺序</button>
+      <ul>
+        <li v-for="(p,index) in filterPersons" :key="p.id">
+          {{p.name}} -- {{p.age}} -- {{p.sex}}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            keyWord: "",
+            sortType: 0, // 0 原顺序 , 1 降序 , 2 升序
+            persons: [
+              { id: "001", name: "马冬梅", age: 19, sex: "女" },
+              { id: "002", name: "周冬雨", age: 18, sex: "女" },
+              { id: "003", name: "周杰伦", age: 22, sex: "男" },
+              { id: "004", name: "温兆伦", age: 21, sex: "男" },
+            ],
+          };
+        },
+        computed: {
+          //  在页面初次渲染时，filterPersons 计算属性 就会自动调用一次
+          filterPersons() {
+            // return this.persons.filter((p) => {     先不要急着返回
+            const arr = this.persons.filter((p) => {
+              return p.name.indexOf(this.keyWord) !== -1; //persons 中存在空值
+            });
+
+            // 判断一下是否需要排序？
+            // if (this.sortType !== 0) {
+            if (this.sortType) {
+              arr.sort((p1, p2) => {
+                return this.sortType === 1 ? p2.age - p1.age : p1.age - p2.age;
+              });
+            }
+
+            // 当不需要排序，就直接 return arr 出去
+            return arr;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

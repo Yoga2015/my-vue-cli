@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期钩子</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- 需求：页面一上来就显示 文字透明度渐变过程 -->
+    <div id="app">
+      <h3 v-text="n"></h3>
+      <h3>当前 n 的值：{{n}}</h3>
+      <button @click="add">点我 n + 1</button>
+      <button @click="destroyVM">点我销毁vm</button>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app", // 没有 el 此时 只经历 beforeCreate、created
+        data() {
+          return {
+            n: 1,
+            flag: true,
+            opacity: 1,
+          };
+        },
+        methods: {
+          add() {
+            console.log("add");
+            this.n++;
+          },
+          destroyVM() {
+            console.log("Vue的实例即将被销毁了");
+            this.$destroy(); // 销毁 vm 后，再点击 '点我 n + 1' 后, 页面也不会重新渲染
+          },
+        },
+        watch: {
+          // 验证 完全销毁一个实例 后，解绑它的全部 自定义事件 监听器。
+          n() {
+            console.log("n 变了");
+          },
+        },
+        // beforeCreate() 数据监测、数据代理 创建之前
+        beforeCreate() {
+          console.log("beforeCreate");
+          // console.log(this);   // Vue
+          // console.log(this.n); // undefined
+          // debugger;
+        },
+
+        // created()  数据监测、数据代理 创建之后 ,
+        // 此时，可以通过 vm 访问到 data 中的数据 、methods中配置的方法
+        // Vue开始解析模板，生成 虚拟DOM (内存中)，页面还不能显示解析好的内容。
+        created() {
+          console.log("created");
+          // console.log(this); // Vue
+          // console.log(this.n); // 1
+          // debugger;
+        },
+
+        // beforeMount() 挂载之前，此时， 1、页面呈现的是 未经 Vue 编译的  DOM 结构，
+        //                       2、所有对 DOM 的操作，最终都不奏效
+        beforeMount() {
+          console.log("beforeMount");
+          // console.log(this); // Vue
+          // document.querySelector("h3").innerText = "哈哈"; //此时页面显示 哈哈 ，移除断点后 恢复原样
+          // debugger;
+        },
+
+        // 将内存中的 虚拟DOM 转为 真实DOM ，并将真实DOM 存一份到 vm.$el，然后 插入页面（肉眼可见）
+        // mounted () 挂载之后 ，页面呈现的是 经过 Vue 编译的  DOM ，尽可能避免操作 DOM
+        mounted() {
+          console.log("mounted");
+          // console.log(this.$el); // 控制台 看 是真实DOM
+          // console.log(this.$el instanceof HTMLElement); //  true
+          // document.querySelector("h3").innerText = "哈哈"; // 此时页面显示 哈哈 ，移除断点也是
+          // debugger;
+        },
+
+        // 点击 按钮 来修改 页面内容
+        // beforeUpdate() 更新之前，此时，数据是新的，但页面是旧的，即：页面尚未和数据保持同步
+        // 在哪个生命周期 页面尚未和数据保持同步 ？ 在 beforeUpdate 阶段
+        beforeUpdate() {
+          console.log("beforeUpdate"); // 点击 按钮 给 n + 1 后 输出打印
+          // console.log(this.n); // 控制台打印 2 ,  页面上的 {{n}} 仍显示为 1，移除断点 才 显示为 2
+          // debugger;
+        },
+
+        // updated() 更新之后，此时，数据是新的，页面也是新的，即：页面 和 数据 保持同步
+        updated() {
+          console.log("updated"); // 点击 按钮 给 n + 1 后 输出打印
+          // console.log(this.n); // 控制台打印 2 , 页面上的 {{n}} 也 显示为 2 了
+          // debugger;
+        },
+
+        // beforeDestroy() 阶段，还能访问到data中的数据、也能调用到方法，但是，所有对数据的修改，不会再触发更新了。
+        beforeDestroy() {
+          console.log("beforeDestroy");
+          console.log(this.n);
+          this.add(); // 控制台里显示 是调用了，但是，不会再触发更新了。
+          this.n = 99; // 不会再触发更新了。
+          // debugger;
+        },
+
+        // destroyed() 此阶段 一般都是忽略的
+        destroyed() {
+          console.log("destroyed");
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,17 +1,34 @@
+<!-- 声明文档类型：HTML超文本标记语言，第五个版本，具有向下兼容低版本的 -->
 <!DOCTYPE html>
-<html lang="">
+<!-- language 【属性：语言】 en = english 、ch = china -->
+<html lang="en">
+  <!-- 头部标签，定义文档的信息，看不到的 -->
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- meta :提供有关页面的元信息，针对 搜索引擎 来更新描述的内容 或 相关的关键词 -->
+    <!-- charset 字符集 ：UTF-8 :万国码 => 通用语言 -->
+    <meta charset="UTF-8" />
+    <!-- 针对IE浏览器的一个特殊配置，含义是 让IE浏览器 以最高的渲染级别 渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启移动端的理想视口 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!-- 配置页签图标 -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <!-- 配置网页标题 -->
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    
+    <!-- 当浏览器不支持 js 时 noscript 中的元素就会被渲染 -->
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to continue.
+      </strong>
     </noscript>
+
+    <!-- 容器 -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
   </body>
 </html>

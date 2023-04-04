@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义指令v-color</title>
+    <!-- 1、引入开发版的 Vue , 在 window全局就有了Vue 这个构造函数 -->
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!--2、准备好一个容器，希望 Vue能够控制下面的这个div,帮我们再把数据填充到 div内部 -->
+    <div id="app">
+      <h1 v-color>App 根组件</h1>
+      <h5 v-color="fontColor">测试</h5>
+      <p>{{name}}</p>
+    </div>
+
+    <!-- 3、创建 Vue 的实例对象 -->
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //阻止 vue在启动是生成的生产提示
+
+      //3.1、创建 Vue 实例  ，参数只能传一个对象 ，这种对象叫 配置对象
+      const vm = new Vue({
+        // el 属性 是固定写法，用于指定当前vm实例要控制页面上的哪个区域，接收的值 是一个 css选择器
+        el: "#app", // el : document.getElementById('root'),
+        data() {
+          return {
+            name: "walking",
+            fontColor: "red",
+          };
+        },
+        // 私有自定义指令的节点
+        directives: {
+          // 定义名为 color 的 自定义指令 ，指向一个配置对象，里面有一个bind()方法，
+          // bind()方法的 第一个形参 el 是 固定写法，是原生DOM对象，是指令绑定的元素。这里指 h1、h5标签
+          //             第二个形参 是 binding ，是用来 接收 自定义指令的 参数值。
+          color: {
+            // 1、指令 与 元素 在内存中成功绑定时, 第一次自动 立即触发 bind函数
+            bind(el, binding) {
+              console.log(el);
+              console.log(binding);
+              el.style.color = "green";
+              el.style.color = binding.value;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

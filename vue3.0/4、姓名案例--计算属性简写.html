@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>姓名案例--计算属性实现</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>姓：<input type="text" v-model="firstName" /></div>
+      <div>名：<input type="text" v-model="lastName" /></div>
+      <div>全名：{{fullName}}</div>
+      <div>全名：{{fullName}}</div>
+      <div>全名：{{fullName}}</div>
+      <!-- fullName 第一次被调用，并返回值后，computed 会缓存 前一次的计算结果（即：返回值） -->
+      <div>
+        上面表面上看fullName被调用了3次 , 但是实际上 fullName 只是被调用了 1次
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+
+        // 只要 data 中的数据发生改变，vue一定会重新解析模板
+        data() {
+          return {
+            firstName: "张",
+            lastName: "三",
+          };
+        },
+
+        computed: {
+          // 计算属性完整写法
+          // get 有什么作用？ 当有人读取 get时，get就会被调用，且返回值就作为 get的值
+          // get 什么时候调用？ 1、初次读取 get 时，2、所依赖的数据发生变化时
+          fullName: {
+            get() {
+              console.log("get 被调用了", this);
+              return this.firstName + this.lastName;
+            },
+            // set() 什么时候调用？ 当fullName被修改时
+            set(value) {
+              console.log("set 被调用了", value);
+              const arr = value.split("-");
+              this.firstName = arr[0];
+              this.lastName = arr[1];
+            },
+          },
+
+          // 计算属性简写
+          fullName() {
+            console.log("get 被调用了", this);
+            return this.firstName + this.lastName;
+          },
+
+        },
+        
+      });
+    </script>
+  </body>
+</html>

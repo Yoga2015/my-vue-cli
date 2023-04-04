@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模拟一个数据检测</title>
+  </head>
+  <body>
+    <script>
+      let data = {
+        name: "北京大学",
+        address: "北京朝阳区",
+        // 当 data对象中 还有 对象
+        a: {
+          b: 1,
+        },
+        person: [
+          { name: "lisi", age: 16 },
+          { name: "lili", age: 17, sex: "男" },
+        ],
+      };
+
+      // 创建 一个监视的实例对象，用于监视data 中属性的变化
+      const obs = new Observer(data);
+      console.log(obs);
+
+      // 创建一个 vm 对象
+      let vm = {};
+      vm._data = data = obs;
+
+      // Observer 监视函数
+      function Observer(obj) {
+        // 遍历出 对象中 所有的属性 形成一个数组
+        const keys = Object.keys(obj);
+
+        // 遍历
+        keys.forEach((k) => {
+          console.log(k);
+          Object.defineProperty(this, k, {
+            get() {
+              return obj[k]; // 这是把 对象中 对应的属性的属性值 return 出去
+            },
+            set(val) {
+              // ${k} 被改了，我要去 解析模板，生成虚拟DOM ...我要开始忙了
+              obj[k] = val;
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

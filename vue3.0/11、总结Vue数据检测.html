@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>总结Vue数据检测</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>学生信息</h1>
+
+      <button @click="student.age++">年龄+1岁</button><br />
+      <button @click="addSex">添加性别属性，默认值：男</button><br />
+      <button @click="unshiftFriend">在列表首位添加一个朋友</button><br />
+      <button @click="updateFirstFriendName">
+        修改第一个朋友的名字为:zhansan</button
+      ><br />
+      <button @click="addHobby">添加一个爱好</button><br />
+      <button @click="updateFirstHobby">修改第一个爱好为：开车</button><br />
+      <button @click="filterBungeeHobby">过滤 抽烟 爱好</button><br />
+
+      <h5>学生名称：{{student.name}}</h5>
+      <h5>学生年龄：{{student.age}}</h5>
+      <h5 v-if="student.sex">学生性别：{{student.sex}}</h5>
+      <h5>学生的爱好：</h5>
+      <ul>
+        <li v-for="(h,index) in student.hobby" :key="h.index">{{h}}</li>
+      </ul>
+      <h5>学生的朋友们：</h5>
+      <ul>
+        <li v-for="(f,index) in student.friend" :key="f.index">
+          {{f.name}}--{{f.age}}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            student: {
+              name: "lisi",
+              age: 20,
+              hobby: ["蹦极", "打羽毛球", "打篮球"],
+              friend: [
+                { name: "wangwu", age: 33 },
+                { name: "laoliu", age: 35 },
+              ],
+            },
+          };
+        },
+        methods: {
+          // 添加 sex性别 属性，默认值：男
+          addSex() {
+            Vue.set(this.student, "sex", "男"); // = vm.$set(this.student, "sex", "男");
+          },
+
+          // 在列表首位添加一个朋友
+          unshiftFriend() {
+            this.student.friend.unshift({ name: "honghong", age: 30 });
+          },
+
+          // 修改第一个朋友的名字为：zhansan
+          updateFirstFriendName() {
+            this.student.friend[0].name = "zhangsan";
+            // this.student.friend.splice(0, 1, { name: "zhangsan", age: 33 });
+          },
+
+          // 添加一个爱好
+          addHobby() {
+            this.student.hobby.push("踢足球");
+          },
+
+          // 修改第一个爱好为：开车
+          updateFirstHobby() {
+            // this.student.hobby.splice(0, 1, "开车");
+            Vue.set(this.student.hobby, 0, "开车");
+          },
+
+          // 过滤 抽烟 爱好
+          filterBungeeHobby() {
+            this.student.hobby = this.student.hobby.filter((h) => {
+              return h !== "蹦极";
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
