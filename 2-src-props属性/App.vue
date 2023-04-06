@@ -1,19 +1,19 @@
 <template>
   <div id="App-container">
-    <School3 />
+    <School />
     <hr>
-    <Student3 />
+    <Student />
 
   </div>
 </template>
 
 <script>
-import School3 from '@/components/School3.vue'
-import Student3 from '@/components/Student3.vue'
+import School from '@/components/MySchool.vue'
+import Student from '@/components/MyStudent.vue'
 export default {
   name: 'MyApp',
   components: {
-    School3, Student3
+    School, Student
   },
 }
 </script>

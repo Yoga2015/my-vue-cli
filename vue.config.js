@@ -1,13 +1,13 @@
-module.exports = {
-  pages: {
-    index: {
-      // page 的入口
-      entry: 'src/index/main.js',
-      // 关闭语法检查  比如当你 定义了一个变量、函数，但是没有使用，也不会报错！
-      lintOnSave: false,
-    }
-  }
-}
+// module.exports = {
+//   pages: {
+//     index: {
+//       // page 的入口
+//       entry: 'src/index/main.js',
+//       // 关闭语法检查  比如当你 定义了一个变量、函数，但是没有使用，也不会报错！
+//       lintOnSave: false,
+//     }
+//   }
+// }
 
 
 
