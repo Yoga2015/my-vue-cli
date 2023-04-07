@@ -1,9 +1,12 @@
 <template>
   <div id="MyList">
     <ul class="todo-main">
-      <MyItem></MyItem>
-      <MyItem></MyItem>
-      <MyItem></MyItem>
+      <MyItem v-for="todoObj in todos" 
+      :key="todoObj.id" 
+      :id="todoObj.id" 
+      :done="todoObj.done" 
+      :title="todoObj.title">
+      </MyItem>
     </ul>
   </div>
 </template>
@@ -14,7 +17,17 @@ export default {
   name: 'MyList',
   components: {
     MyItem
-  }
+  },
+  data() {
+    return {
+      todos: [
+        { id: '001', title: '睡觉', done: true },
+        { id: '002', title: '吃饭', done: false },
+        { id: '003', title: '玩游戏', done: true },
+        { id: '004', title: '旅游', done: true },
+      ]
+    }
+  },
 }
 </script>
 

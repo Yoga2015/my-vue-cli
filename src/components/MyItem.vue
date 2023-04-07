@@ -2,17 +2,34 @@
   <div id="MyItem">
     <li>
       <label>
-        <input type="checkbox" />
-        <span>xxxxx</span>
+        <input type="checkbox" :checked="done" />
+        <span>{{ title }}</span>
       </label>
-      <button class="btn btn-danger" style="display:none">删除</button>
+      <button class="btn btn-danger" style="display:block">删除</button>
     </li>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MyItem'
+  name: 'MyItem',
+  props: {
+    id: {
+      type: String,   // Number数据类型是有限的，故用 String类型
+      default: ''
+    },
+    done: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+  },
+  mounted() {
+    console.log('todoObj', this);
+  }
 }
 </script>
 

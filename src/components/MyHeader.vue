@@ -1,12 +1,20 @@
 <template>
   <div class="todo-header">
-    <input type="text" placeholder="请输入你的任务名称，按回车键确认" />
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model.trim="todos" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MyHeader'
+  name: 'MyHeader',
+  data() {
+    return {
+      todos: {}
+    }
+  },
+  updated() {
+    console.log(this.todos);
+  }
 }
 </script>
 
