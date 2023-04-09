@@ -2,7 +2,8 @@
   <div id="MyItem">
     <li>
       <label>
-        <input type="checkbox" :checked="done" />
+        <!--:checked="done"是为了渲染初始化列表时，显示谁勾了，谁没勾 -->
+        <input type="checkbox" :checked="done" @change="handleCheck(id)" />
         <span>{{ title }}</span>
       </label>
       <button class="btn btn-danger" style="display:block">删除</button>
@@ -13,9 +14,11 @@
 <script>
 export default {
   name: 'MyItem',
+  // props节点中，定义的 自定义属性 的名称 优先级很高，
   props: {
     id: {
-      type: String,   // Number数据类型是有限的，故用 String类型
+      // Number数据类型是有限的，故用 String类型
+      type: String,
       default: ''
     },
     done: {
@@ -27,8 +30,14 @@ export default {
       default: ''
     }
   },
-  mounted() {
-    console.log('todoObj', this);
+  // mounted() {
+  //   // 每条数据 挂载到 真实DOM 后，都打印输出
+  //   console.log('todoObj', this);
+  // },
+  methods: {
+    handleCheck(id) {
+      console.log(id);
+    }
   }
 }
 </script>

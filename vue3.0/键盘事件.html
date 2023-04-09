@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title> 键盘事件 </title>
+  <!-- 1、导入 vue.js -->
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <!-- 2、准备好一个容器，是在页面中声明一个将要被vue所控制的DOM区域 -->
+  <div id="root">
+
+    <h3>欢迎来到{{name}}学习</h3>
+    <input type="text" placeholder="按下回车键提示输入" @keyup.enter="showInfo">
+    <input type="text" placeholder="按下回车键提示输入" @keyup.delete="showInfo">
+    <input type="text" placeholder="按下回车键提示输入" @keyup.esc="showInfo">
+    <input type="text" placeholder="按下回车键提示输入" @keyup="showInfo">
+
+    <input type="text" placeholder="按下回车键提示输入" @keydown.tab="showInfo">
+    <input type="text" placeholder="按下回车键提示输入" @keydown.ctrl="showInfo">
+
+    <!-- 自定义键名 -->
+    <input type="text" placeholder="按下回车键提示输入" @keydown.huiche="showInfo">
+
+    <!-- 输入的内容， 需按 ctrl  + y  才在控制台显示 -->
+    <input type="text" placeholder="按下回车键提示输入" @keydown.ctrl.y="showInfo">
+
+  </div>
+
+  <!-- 3、创建 vue 的实例对象 -->
+  <script type="text/javascript">
+    Vue.config.productionTip = false;  //阻止 vue在启动是生成的生产提示
+    Vue.config.keyCodes.huiche = 13;  // 自定义了一个 别名按键
+
+    new Vue({
+      el: '#root',
+      data: {           // vm._data = data
+        name: '清华大学',
+      },
+      methods: {
+        showInfo(e) {
+          // console.log(e.key, e.keyCode); // enter键的键值是 13
+          // if (e.keyCode !== 13) return
+          console.log(e.target.value);
+        }
+      },
+    }); 
+  </script>
+</body>
+</html>

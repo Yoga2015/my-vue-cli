@@ -1,15 +1,16 @@
 <template>
-    <div id="root">
-      <div class="todo-container">
-
-        <div class="todo-wrap">
-          <MyHeader></MyHeader>
-          <MyList></MyList>
-          <MyFooter></MyFooter>
-        </div>
-
+  <div id="root">
+    <div class="todo-container">
+      <div class="todo-wrap">
+        
+        <!-- App组件 将 一个函数 传给 MyHeader子组件  -->
+        <MyHeader :addTodo="addTodo"></MyHeader>
+        <!-- 将一个数组 传给 MyList 子组件 -->
+        <MyList :todos="todos"></MyList>
+        <MyFooter></MyFooter>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -22,6 +23,21 @@ export default {
   components: {
     MyHeader, MyList, MyFooter
   },
+  data() {
+    return {
+      todos: [
+        { id: '001', title: '睡觉', done: true },
+        { id: '002', title: '吃饭', done: false },
+        { id: '003', title: '玩游戏', done: true },
+      ]
+    }
+  },
+  methods: {
+    addTodo(todoObj) {
+      console.log('我是APP组件,收到了数据 ', todoObj);
+      this.todos.unshift(todoObj)
+    }
+  }
 }
 </script>
 

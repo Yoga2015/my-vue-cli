@@ -13,21 +13,20 @@
 
 <script>
 import MyItem from './MyItem.vue';
+
 export default {
   name: 'MyList',
   components: {
     MyItem
   },
-  data() {
-    return {
-      todos: [
-        { id: '001', title: '睡觉', done: true },
-        { id: '002', title: '吃饭', done: false },
-        { id: '003', title: '玩游戏', done: true },
-        { id: '004', title: '旅游', done: true },
-      ]
+
+  props: {
+    todos: {
+      type: Array,
+      required: true
     }
   },
+
 }
 </script>
 
