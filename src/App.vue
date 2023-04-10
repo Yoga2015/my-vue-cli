@@ -5,8 +5,8 @@
         <!--App组件将 一个函数 传给 MyHeader子组件-->
         <MyHeader :addTodo="addTodo" />
         <!-- 将一个数组 传给 MyList 子组件 -->
-        <MyList :todos="todos" 
-          :checkTodo="checkTodo" />
+        <MyList :todos="todos" :checkTodo="checkTodo" 
+        :deleteTodo="deleteTodo" />
         <MyFooter />
       </div>
     </div>
@@ -37,12 +37,21 @@ export default {
       console.log('我是APP组件,收到了数据 ', todoObj);
       this.todos.unshift(todoObj)
     },
+
     // 勾选 or 取消勾选一个todo
     checkTodo(id) {
       this.todos.forEach((todo) => {
         if (todo.id === id) {
           return todo.done = !todo.done
         }
+      })
+    },
+
+    // 删除 一条todo
+    deleteTodo(id) {
+      // filter()方法 不会删除 原数组
+      this.todos = this.todos.filter((todo) => {
+        return todo.id !== id
       })
     }
   }
