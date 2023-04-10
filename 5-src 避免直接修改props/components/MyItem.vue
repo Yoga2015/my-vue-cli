@@ -4,9 +4,8 @@
       <label>
         <!--:checked="done" 是为了初始化展示列表时，显示谁勾了，谁没勾-->
         <!-- @change="handleCheck(todo.id) 是为了 更新后续操作，谁取消勾选，谁又勾选了  -->
-        <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)" />
-        <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
-        <!-- <input type="checkbox" v-model="todo.done" /> -->
+        <!-- <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)" /> -->
+        <input type="checkbox" v-model="todo.done" />
         <span>{{ todo.title }}</span>
       </label>
       <button class="btn btn-danger" style="display:block">
@@ -21,14 +20,8 @@ export default {
   name: 'MyItem',
   // 声明接收 todo对象
   // props节点中，定义的 自定义属性 的名称 优先级很高
-  props: ['todo', 'checkTodo'],
-  methods: {
-    handleCheck(id) {
-      // console.log(id);
-      // 通知 App组件 将对应的todo对象的done 值取反
-      this.checkTodo(id)
-    }
-  }
+  props: ['todo'],
+
 }
 </script>
 
