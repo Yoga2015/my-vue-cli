@@ -7,7 +7,7 @@
         <!-- 将一个数组 传给 MyList 子组件 -->
         <MyList :todos="todos" :checkTodo="checkTodo" 
         :deleteTodo="deleteTodo" />
-        <MyFooter />
+        <MyFooter :todos="todos"/>
       </div>
     </div>
   </div>

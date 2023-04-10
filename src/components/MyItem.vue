@@ -2,19 +2,17 @@
   <div id="MyItem">
     <li>
       <label>
-         <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
-          <!-- <input type="checkbox" v-model="todo.done" /> -->
-          
+        <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
+        <!-- <input type="checkbox" v-model="todo.done" /> -->
+
         <!--:checked="done" 是为了初始化展示列表时，显示谁勾了，谁没勾-->
         <!-- @change="handleCheck(todo.id) 是为了更新后续操作，谁取消勾选，谁又勾选了  -->
-        <input type="checkbox" :checked="todo.done" 
-        @change="handleCheck(todo.id)" />
+        <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)" />
 
         <span>{{ todo.title }}</span>
       </label>
-      <button class="btn btn-danger" 
-       @click="handleTodo(todo.id)">删除
-    </button>
+      <button class="btn btn-danger" @click="handleTodo(todo.id)">删除
+      </button>
     </li>
   </div>
 </template>
