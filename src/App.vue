@@ -5,9 +5,8 @@
         <!--App组件将 一个函数 传给 MyHeader子组件-->
         <MyHeader :addTodo="addTodo" />
         <!-- 将一个数组 传给 MyList 子组件 -->
-        <MyList :todos="todos" :checkTodo="checkTodo" 
-        :deleteTodo="deleteTodo" />
-        <MyFooter :todos="todos"/>
+        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo" />
+        <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo" />
       </div>
     </div>
   </div>
@@ -53,7 +52,22 @@ export default {
       this.todos = this.todos.filter((todo) => {
         return todo.id !== id
       })
+    },
+
+    // 全选or取消全选
+    checkAllTodo(done) {
+      this.todos.forEach((todo) => {
+        todo.done = done
+      })
+    },
+
+    // 清除 所有 已完成(已勾选) 的 todo
+    clearAllTodo() {
+      this.todos = this.todos.filter((todo) => {
+        return !todo.done
+      })
     }
+
   }
 }
 </script>

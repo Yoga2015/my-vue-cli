@@ -1,19 +1,21 @@
 <template>
   <div class="todo-footer" v-show="total">
     <label>
-      <input type="checkbox" :checked="isAll" @change="checkAll" />
+      <!-- :checked="isAll" 处理初始化的展示   @change="checkAll" 处理后续的交互后的展示 -->
+      <!-- <input type="checkbox" :checked="isAll" @change="checkAll" /> -->
+      <input type="checkbox" v-model="isAll" />
     </label>
     <span>
       <span>已完成{{ doneTotal }} </span> / 全部{{ total }}
     </span>
-    <button class="btn btn-danger">清除已完成任务</button>
+    <button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'MyFooter',
-  props: ['todos'],
+  props: ['todos', 'checkAllTodo', 'clearAllTodo'],
   computed: {
     // todo个数
     total() {
@@ -42,15 +44,35 @@ export default {
 
     },
 
-    // 全选 or 取消全选
-    isAll() {
-      return this.doneTotal === this.total && this.total > 0
+    // 全选 or 取消全选    处理初始化的展示
+    // isAll() {   // true                       true
+    //   return this.doneTotal === this.total && this.total > 0
+    // }
+
+    // 全选 or 取消全选           计算属性完整写法
+    isAll: {
+      // 处理初始化的展示
+      get() {     // true                          true
+        return this.doneTotal === this.total && this.total > 0
+      },
+      // 处理后续的交互后的展示
+      set(value) {
+        this.checkAllTodo(value)
+      }
     }
+
   },
   methods: {
-    checkAll() {
-      console.log(1);
-      this.todos.every()
+    // 全选 or 取消全选   处理后续的交互后的展示
+    // checkAll(e) {
+    //   // console.log(e.target);
+    //   // console.log(e.target.checked);
+    //   this.checkAllTodo(e.target.checked)
+    // }
+
+    clearAll() {
+      // 通知 App组件 去删除 所有已勾选的todo 
+      this.clearAllTodo()
     }
   }
 }
