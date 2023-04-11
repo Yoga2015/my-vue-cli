@@ -1,6 +1,6 @@
 <template>
   <div class="todo-header">
-    <!-- 子 传 父（App组件） -->
+    <!-- 子 传 父（App组件）（要求父先给子一个函数，放在 props选项中 进行传递） -->
     <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model.trim="title" @keyup.enter="add" />
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   props: ['addTodo'],
   methods: {
-    // 添加一条 todo
+    // 添加一条 todo ，本质用于 通知 App组件 去添加一个 todo对象
     add() {
       // console.log(e.target.value);
 

@@ -1,12 +1,16 @@
 <template>
   <div id="root">
     <div class="todo-container">
-      <div class="todo-wrap">
+      <div class="todo-wrap">       
         <!--App组件将 一个函数 传给 MyHeader子组件-->
         <MyHeader :addTodo="addTodo" />
+
         <!-- 将一个数组 传给 MyList 子组件 -->
-        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo" />
-        <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo" />
+        <MyList :todos="todos" :checkTodo="checkTodo" 
+        :deleteTodo="deleteTodo" />
+
+        <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" 
+         :clearAllTodo="clearAllTodo" />
       </div>
     </div>
   </div>
@@ -36,7 +40,7 @@ export default {
       console.log('我是APP组件,收到了数据 ', todoObj);
       this.todos.unshift(todoObj)
     },
-
+ 
     // 勾选 or 取消勾选一个todo
     checkTodo(id) {
       this.todos.forEach((todo) => {
@@ -67,7 +71,6 @@ export default {
         return !todo.done
       })
     }
-
   }
 }
 </script>

@@ -49,7 +49,8 @@ export default {
     //   return this.doneTotal === this.total && this.total > 0
     // }
 
-    // 全选 or 取消全选           计算属性完整写法
+
+    // 升级 全选 or 取消全选           计算属性完整写法
     isAll: {
       // 处理初始化的展示
       get() {     // true                          true

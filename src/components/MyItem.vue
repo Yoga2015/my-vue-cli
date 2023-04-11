@@ -2,7 +2,7 @@
   <div id="MyItem">
     <li>
       <label>
-        <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
+        <!-- v-model绑定的值，不能是props传过来的值，因为props是不可以修改的！ -->
         <!-- <input type="checkbox" v-model="todo.done" /> -->
 
         <!--:checked="done" 是为了初始化展示列表时，显示谁勾了，谁没勾-->
