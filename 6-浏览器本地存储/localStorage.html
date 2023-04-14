@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocalStorage</title>
+  </head>
+  <body>
+    <h3>localStorage</h3>
+    <button onclick="saveData()">点击我保存一个数据</button>
+    <button onclick="readData()">点击我获取一个数据</button>
+    <button onclick="deleteData()">点击我删除一个数据</button>
+    <button onclick="deleteAllData()">点击我删除所有数据</button>
+
+    <script>
+      let p = { name: "konka", age: 18 };
+      // console.log(p.toString()); //  [object Object]
+
+      // 保存一个数据
+      function saveData() {
+        localStorage.setItem("msg1", "walking"); // "walking"
+        localStorage.setItem("msg2", 1); // "1"
+
+        localStorage.setItem("msg3", p); // [object Object] ，非对象本身模样了，面目全非了
+        // 非字符串类型的，都会进行 转换成 字符串类型 后 存储。即调用了 toString()
+
+        //  解决方案是 ： 使用 JSON.stringify() 编码 后 存储，这样才能原汁原味的存储。
+        localStorage.setItem("msg4", JSON.stringify(p)); // { name: "konka", age: 18 }
+      }
+
+      // 获取一个数据
+      function readData() {
+        console.log(localStorage.getItem("msg1"));
+        console.log(localStorage.getItem("msg2"));
+        console.log(localStorage.getItem("msg3"));
+        console.log(localStorage.getItem("msg4"));
+        console.log(localStorage.getItem("msg5")); // null  根本没这数据
+
+        const result = localStorage.getItem("msg4");
+        console.log(JSON.parse(result));
+      }
+
+      // 删除一个数据
+      function deleteData() {
+        localStorage.removeItem("msg2");
+      }
+
+      // 删除所有数据
+      function deleteAllData() {
+        localStorage.clear();
+      }
+    </script>
+  </body>
+</html>
