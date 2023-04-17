@@ -15,7 +15,8 @@
 <script>
 export default {
   name: 'MyFooter',
-  props: ['todos', 'checkAllTodo', 'clearAllTodo'],
+  // props: ['todos', 'checkAllTodo', 'clearAllTodo'],
+  props: ['todos'],
   computed: {
     // todo个数
     total() {
@@ -58,10 +59,10 @@ export default {
       },
       // 处理后续的交互后的展示
       set(value) {
-        this.checkAllTodo(value)
+        // this.checkAllTodo(value)
+        this.$emit('checkAllTodo', value)
       }
     }
-
   },
   methods: {
     // 全选 or 取消全选   处理后续的交互后的展示
@@ -73,7 +74,8 @@ export default {
 
     clearAll() {
       // 通知 App组件 去删除 所有已勾选的todo 
-      this.clearAllTodo()
+      // this.clearAllTodo()
+      this.$emit('clearAllTodo')
     }
   }
 }
