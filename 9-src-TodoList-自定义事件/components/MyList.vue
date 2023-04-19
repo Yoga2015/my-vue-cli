@@ -1,10 +1,8 @@
 <template>
   <div id="MyList">
     <ul class="todo-main">
-      <MyItem v-for="todoObj in todos" :key="todoObj.id" 
-      :todo="todoObj" 
-      :checkTodo="checkTodo" 
-      :deleteTodo="deleteTodo"/>
+      <MyItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj" :checkTodo="checkTodo"
+        :deleteTodo="deleteTodo" />
     </ul>
   </div>
 </template>
@@ -17,8 +15,9 @@ export default {
   components: {
     MyItem
   },
-
-  props: ['todos', 'checkTodo','deleteTodo']
+  // 声明接收 App传递过来的数据，其中todos是自己用的，
+  // checkTodo 和  deleteTodo 是给 子组件MyItem 用的
+  props: ['todos', 'checkTodo', 'deleteTodo']
 
 }
 </script>
