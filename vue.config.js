@@ -1,18 +1,27 @@
-// module.exports = {
-//   pages: {
-//     index: {
-//       // page 的入口
-//       entry: 'src/index/main.js',
-//       // 关闭语法检查  比如当你 定义了一个变量、函数，但是没有使用，也不会报错！
-//       lintOnSave: false,
-//     }
-//   }
-// }
+module.exports = {
+  // 配置、开启 代理服务器 方式一
+  // devServer: {
+  //   proxy: 'http://localhost:5000'
+  // },
 
+  // 配置、开启 代理服务器 方式二
+  devServer: {
+    proxy: {
 
+      '/walking': {     // 匹配所有以 '/walking' 开头的请求路径
+        target: 'http://localhost:5000',   // 代理目标的基础路径
+        pathRewrite: { '^/walking': '' },  // 路径重写
+        ws: true,    //  支持 websocket
+        changeOrigin: true   // 可以说谎 用于控制请求头中的host值
+      },
 
-// 如果 你 想 个性化的定制 脚手架 vue-cli  ，就在  myvueapp 项目 根目录下 新建 vue.config.js 。
-// vue 最终会把 vue.config.js 输送给 webpack, webpack 是基于 node.js，node.js 所采用的模块化是 commonJs，
-
-// 在 vue.config.js 中 进行 自定义 配置 ，即重写 配置，
-// 因为 vue 最终会把 vue.config.js  中的 自定义 配置 合并到 webpack 中，合成一体
+      '/demo': {     // 匹配所有以 '/demo' 开头的请求路径
+        target: 'http://localhost:5001',   // 代理目标的基础路径
+        pathRewrite: { '^/demo': '' },  // 路径重写
+        ws: true,    //  支持 websocket
+        changeOrigin: true   // 可以说谎 用于控制请求头中的host值
+      },
+      
+    }
+  }
+}

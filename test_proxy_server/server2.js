@@ -17,7 +17,10 @@ app.get('/cars', (request, response) => {
 
 app.listen(5001, (err) => {
 	if (!err) {
-		console.log('服务器2启动成功了,请求汽车信息地址为:http://localhost:5001/cars');
+		console.log(`
+		服务器2启动成功了,
+		请求汽车信息地址为:
+		http://localhost:5001/cars`);
 	}
 })
 
