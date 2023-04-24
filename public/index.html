@@ -13,11 +13,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!-- 配置页签图标 -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+
+    <!-- 引入 第三方 bootstrap.css -->
+    <link rel="stylesheet" href="<%= BASE_URL %>css/bootstrap.css" />
+
     <!-- 配置网页标题 -->
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    
     <!-- 当浏览器不支持 js 时 noscript 中的元素就会被渲染 -->
     <noscript>
       <strong>
@@ -29,6 +32,5 @@
     <!-- 容器 -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
-
   </body>
 </html>

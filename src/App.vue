@@ -1,42 +1,50 @@
 <template>
-  <div id="root">
+  <!-- <div id="app"> -->
+  <div class="container">
 
-    <button @click="getStudents">获取学生信息</button>
-    <button @click="getCars">获取车信息</button>
+    <!-- 巨幕  搜索框 -->
+    <Search />
+
+    <!-- GitHub 用户列表 -->
+    <List />
 
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
-import axios from 'axios'
-
+import Search from './components/GithubUserSearch.vue'
+import List from './components/GithubUserList.vue'
 export default {
   name: 'MyApp',
-
-  methods: {
-
-    getStudents() {
-      axios.get('http://localhost:8080/walking/students').then(
-        response => {
-          console.log('请求成功了', response.data);
-        },
-        error => {
-          console.log('请求失败了', error.message);
-        }
-      )
-    },
-
-    getCars() {
-      axios.get('http://localhost:8080/demo/cars').then(
-        response => {
-          console.log('请求成功了', response.data);
-        },
-        error => {
-          console.log('请求失败了', error.message);
-        }
-      )
-    }
-
-  }
+  components: { Search, List }
 }
 </script>
+
+<style>
+.album {
+  min-height: 50rem;
+  /* Can be removed; just added for demo purposes */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 1px solid #efefef;
+  text-align: center;
+}
+
+.card>img {
+  margin-bottom: .75rem;
+  border-radius: 100px;
+}
+
+.card-text {
+  font-size: 85%;
+}
+</style>
