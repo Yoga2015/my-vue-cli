@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'GithubUserSearch',
   data() {
@@ -21,12 +20,12 @@ export default {
   },
   methods: {
     searchUsers() {
+      console.log(this);    // 打印中 出现 $http
 
-      // 请求前更新List的数据   (GithubUserList组件中的 动态数据 都是来自 GithubUserSearch组件)
-      this.$bus.$emit('updataListData',
-        { isFirst: false, isLoading: true, errMsg: '', users: [] })
+      //   请求前更新List的数据   (GithubUserList组件中的 动态数据 都是来自 GithubUserSearch组件)
+      this.$bus.$emit('updataListData', { isFirst: false, isLoading: true, errMsg: '', users: [] })
 
-      axios.get(`https://api.github.com/search/users?q=${this.keyWord}`).then(
+      this.$http.get(`https://api.github.com/search/users?q=${this.keyWord}`).then(
 
         response => {
           console.log('请求成功了');   // 此时 GithubUserSearch 已接收到响应回来的数据
@@ -49,6 +48,7 @@ export default {
         }
 
       )
+
     }
   }
 }
