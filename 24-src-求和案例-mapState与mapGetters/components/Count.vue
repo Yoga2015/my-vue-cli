@@ -28,6 +28,7 @@ export default {
     }
   },
 
+  // 计算属性的优化
   computed: {       // 组件中的 computed 只能自己使用，其他组件用不了
     // 靠程序员自己亲自去写计算属性
     // he() {
