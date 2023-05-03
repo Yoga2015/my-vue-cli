@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 // 4、创建 Vue 的实例 vm
 new Vue({
   render: h => h(App),
-  store,    // 使用 Vuex的 store 管理组件的状态 
+  store,    // 
   beforeCreate() {
     Vue.prototype.$bus = this  // 安装、创建 全局事件总线
   }

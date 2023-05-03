@@ -35,15 +35,14 @@ export default {
     // ...mapState({ he: 'sum', xuexiao: 'school', xueke: 'subject' }),
 
     // 借助 mapState 生成计算属性，从 state 中读取数据  （数组写法）
-    ...mapState('countAbout', ['sum', 'school', 'subject']),
-    ...mapState('personAbout', ['personList']),
+    ...mapState(['sum', 'school', 'subject', 'personList']),
 
 
     // 借助 mapGetters 生成计算属性，从 getters 中读取数据  （对象写法）
     // ...mapGetters({ BigSum: 'BigSum' })
 
     // 借助 mapGetters 生成计算属性，从 getters 中读取数据  （数组写法）
-    ...mapGetters('countAbout', ['BigSum'])
+    ...mapGetters(['BigSum'])
   },
 
   // actions 动作
@@ -63,7 +62,7 @@ export default {
     // },
 
     // 借助 mapMutations 生成对应的方法，方法中会调用 commit 去联系 mutations   
-    ...mapMutations('countAbout', { increment: 'JIA', decrement: 'JIAN' }),  //对象写法
+    ...mapMutations({ increment: 'JIA', decrement: 'JIAN' }),  //对象写法
 
     // 借助 mapMutations 生成对应的方法，方法中会调用 commit 去联系 mutations
     // ...mapMutations(['JIA', 'JIAN']),    // 数组写法
@@ -81,7 +80,7 @@ export default {
     // },
 
     // 借助 mapActions 生成对应的方法，方法中调用 dispatch 去联系 actions
-    ...mapActions('countAbout', { incrementOdd: 'jiaOdd', incrementWait: 'jiaWait' })
+    ...mapActions({ incrementOdd: 'jiaOdd', incrementWait: 'jiaWait' })
     // ...mapActions(['jiaOdd', 'jiaWait'])    // 数组写法
   },
 
